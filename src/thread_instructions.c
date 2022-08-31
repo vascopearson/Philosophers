@@ -11,7 +11,6 @@ void    *check_starvation_and_enough(void *philosophers)
     while (philos[i].stop == 0)
     {
         i = 0;
-        //printf("nbr_philos: %i\n", philos[i].args->nbr_philos);
         while (i < philos[0].nbr_philos)
         {
             current_time = get_time();
@@ -22,23 +21,24 @@ void    *check_starvation_and_enough(void *philosophers)
             }
             i++;
         }
+        if (enough_meals(philos)) // || philo->stop ??
+            return (NULL);
     }
-    enough_meals(philos);
     return (NULL);
 }
 
 void    dead_philosopher(t_philos *philos, int i)
 {
-    philos[i].dead = 1;
-    pthread_mutex_lock(&philos[i].args->print_mutex);
-    printf("%ld %d died\n", get_time() - philos[i].start_time, philos[i].id + 1);
+    philos->args->dead = 1; //Works for all philos?? Don't need philo[i].args->dead??
+    pthread_mutex_lock(&philos->print_mutex); //No need for index?
+    printf("%ld %d died\n", get_time() - philos[i].start_time, philos[i].id + 1); // philos->start_time ???
     i = 0;
-    while (i < philos[i].args->nbr_philos)
+    while (i < philos->nbr_philos)
     {
         philos[i].stop = 1;
         i++;
     }
-    pthread_mutex_unlock(&philos[i].args->print_mutex);
+    pthread_mutex_unlock(&philos->print_mutex); //No need for index?
 }
 
 void    *do_actions(void* philosopher)
