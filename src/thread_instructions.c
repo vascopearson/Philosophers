@@ -6,17 +6,14 @@ void    *check_starvation_and_enough(void *philosophers)
     long        current_time;
     int         i;
 
-    printf("5\n");
     philos = (t_philos *)philosophers;
     i = 0;
     while (philos[i].stop == 0)
     {
-        printf("6\n");
         i = 0;
-        printf("nbr_philos: %i\n", philos[i].args->nbr_philos);
-        while (i < philos[i].args->nbr_philos)
+        //printf("nbr_philos: %i\n", philos[i].args->nbr_philos);
+        while (i < philos[0].nbr_philos)
         {
-            printf("7\n");
             current_time = get_time();
             if (current_time - philos[i].time_of_last_meal > philos[i].args->time_to_die)
             {
@@ -50,39 +47,36 @@ void    *do_actions(void* philosopher)
 
     philos = (t_philos *)philosopher;
     philos->time_of_last_meal = get_time();
-    printf("1.5\n");
     philos->start_time = get_time();
-    printf("2\n");
-    while (!philos->dead)
+    while (!philos->args->dead)
     {
-        printf("3\n");
-        if (philos->dead || philos->stop || philos->enough)
+        if (philos->args->dead || philos->stop || enough_meals(philos))
             return (NULL);
         ft_get_forks(philos);
-        if (philos->dead || philos->stop || philos->enough)
+        if (philos->args->dead || philos->stop || enough_meals(philos))
             return (NULL);
         ft_eat(philos);
-        if (philos->dead || philos->stop || philos->enough)
+        if (philos->args->dead || philos->stop || enough_meals(philos))
             return (NULL);
         ft_sleep(philos);
-        if (philos->dead || philos->stop || philos->enough)
+        if (philos->args->dead || philos->stop || enough_meals(philos))
             return (NULL);
         ft_think(philos);
     }
     return (NULL);
 }
 
-void enough_meals(t_philos *philos)
+int enough_meals(t_philos *philos)
 {
     int i;
     int enough;
 
+    if (philos->nbr_meals_total < 1) // || philos->nbr_meals_eaten == -1)?????
+        return (0);
     i = 0;
     enough = 1;
-    while (i < philos[i].args->nbr_philos)
+    while (i < philos[0].nbr_philos)
     {
-        if (philos[i].nbr_meals_total == -1 || philos[i].nbr_meals_eaten <= 0)
-            return ;
         if (philos[i].nbr_meals_eaten < philos->nbr_meals_total)
             enough = 0;
         i++;
@@ -90,10 +84,12 @@ void enough_meals(t_philos *philos)
     if (enough == 1)
     {
         i = 0;
-        while (i < philos[i].args->nbr_philos)
+        while (i < philos[0].nbr_philos)
         {
-            philos[i].enough = 1;
+            philos[i].stop = 1;   // Explain why stop = 1 is necessary
             i++;
         }
+        return (1);
     }
+    return (0);
 }

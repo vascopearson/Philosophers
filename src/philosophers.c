@@ -7,9 +7,8 @@ int main(int argc, char **argv)
     if (check_invalid(argc, argv))
         return (1);
     if (check_and_init_args(&args, argc, argv))
-    printf("1\n");
+        return (1);
     init_philos(&args);
-    printf("2\n");
     init_mutexes(&args);
     init_threads(&args);
 }
@@ -55,11 +54,16 @@ int check_and_init_args(t_args *args, int argc, char **argv)
     args->time_to_die = ft_atoi(argv[2]);
     args->time_to_eat = ft_atoi(argv[3]);
     args->time_to_sleep = ft_atoi(argv[4]);
-    if (argc == 6)
-        args->nbr_meals_for_each = ft_atoi(argv[5]);
-    if (argc == 5)
-        args->nbr_meals_for_each = -1;
+    args->dead = 0;
     if (args->nbr_philos < 1)
         return (1);
+    if (argc == 6)
+    {
+        args->nbr_meals_for_each = ft_atoi(argv[5]);
+        if (args->nbr_meals_for_each < 1)
+			return (1);
+    }
+    if (argc == 5)
+        args->nbr_meals_for_each = -1;
     return (0);
 }

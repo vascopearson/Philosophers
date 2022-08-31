@@ -1,13 +1,12 @@
 #include "../inc/philosophers.h"
 
-int get_time()
+long	get_time()
 {
     struct timeval current_time;
     long    time;
 
     gettimeofday(&current_time, NULL);
-    time = current_time.tv_sec * 1000 + current_time.tv_usec / 1000;
-    printf("Time %li\n", time);
+    time = (size_t)current_time.tv_sec * 1000 + (size_t)current_time.tv_usec / 1000;
     return (time);
 }
 
