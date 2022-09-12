@@ -7,7 +7,7 @@ void    ft_get_forks(t_philos *philos)
     	pthread_mutex_lock(philos->left_fork);
     	pthread_mutex_lock(philos->right_fork);
     	pthread_mutex_lock(&philos->print_mutex);
-    	if (philos->stop != 1 && philos->dead != 1 && philos->enough != 1)
+    	if (philos->stop != 1)
 		{
 			printf("%ld %d has taken a fork\n", \
 				get_time() - philos->start_time, philos->id + 1);
@@ -16,12 +16,12 @@ void    ft_get_forks(t_philos *philos)
 		}
 		pthread_mutex_unlock(&philos->print_mutex);
 	}
-	else //STILL PROBLEM, REMOVE?
+	else // REMOVE?
 	{
 		pthread_mutex_lock(philos->left_fork);
     	pthread_mutex_lock(philos->right_fork);
     	pthread_mutex_lock(&philos->print_mutex);
-    	if (philos->stop != 1 && philos->dead != 1 && philos->enough != 1)
+    	if (philos->stop != 1)
 		{
 			printf("%ld %d has taken a fork\n", \
 				get_time() - philos->start_time, philos->id + 1);

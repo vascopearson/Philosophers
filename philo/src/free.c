@@ -10,7 +10,7 @@ void    destroy_mutexes(t_args *args)
         pthread_mutex_unlock(&args->fork_mutexes[philo_counter]);
         pthread_mutex_destroy(&args->fork_mutexes[philo_counter]);
     }
-    pthread_mutex_unlock(&args->print_mutex);
+    pthread_mutex_unlock(&args->print_mutex); //CHECKKKKK
     pthread_mutex_destroy(&args->print_mutex);
 }
 

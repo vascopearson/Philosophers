@@ -14,14 +14,14 @@ void    *check_starvation_and_enough(void *philosophers)
         while (i < philos[0].nbr_philos)
         {
             current_time = get_time();
-            if (current_time - philos[i].time_of_last_meal > philos[i].args->time_to_die)
+            if (current_time - philos[i].time_of_last_meal > philos[i].limit_of_life)
             {
                 dead_philosopher(philos, i);
                 return (NULL);
             }
             i++;
         }
-        if (enough_meals(philos)) // || philo->stop ??
+        if (enough_meals(philos) || philos->stop)
             return (NULL);
     }
     return (NULL);

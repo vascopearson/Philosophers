@@ -1,6 +1,7 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -18,6 +19,7 @@ typedef struct s_philos
     int time_to_sleep;
     int time_to_eat;
     int time_to_die;
+    int limit_of_life; //REMOVE??
     time_t time_of_last_meal;
     time_t start_time;
     int dead; // REMOVE ??

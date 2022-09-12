@@ -17,6 +17,7 @@ void    init_philos(t_args *args)
         philos[i].time_to_sleep = args->time_to_sleep;
         philos[i].time_to_eat = args->time_to_eat;
         philos[i].time_to_die = args->time_to_die;  // LIMIT OF LIFE ??
+        philos[i].limit_of_life = args->time_to_die; //REMOVE??
         philos[i].dead = 0; // REMOVEEEE ??
         philos[i].stop = 0;
         philos[i].enough = 0; // REMOVEEE ???
@@ -52,7 +53,7 @@ void    init_threads(t_args *args)
     threads = malloc(sizeof(pthread_t) * philo_counter);
     while (philo_counter--)
         pthread_create(&threads[philo_counter], NULL, do_actions, (void *)&args->philos[philo_counter]);
-    pthread_create(&starvation, NULL, check_starvation_and_enough, (void *)&args->philos);
+    pthread_create(&starvation, NULL, check_starvation_and_enough, (void *)args->philos);
     pthread_join(starvation, NULL);
     args->philos_tid = threads;
     philo_counter = args->nbr_philos;

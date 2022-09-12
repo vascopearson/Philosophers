@@ -11,6 +11,9 @@ int main(int argc, char **argv)
     init_mutexes(&args);
     init_philos(&args);
     init_threads(&args);
+    destroy_mutexes(&args);
+    free_args(&args);
+    return (0);
 }
 
 int check_invalid(int argc, char **argv)
