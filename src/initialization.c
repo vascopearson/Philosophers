@@ -37,7 +37,7 @@ void    init_mutexes(t_args *args)
     mutex = malloc(sizeof(pthread_mutex_t) * philo_counter);
     while (philo_counter--)
         pthread_mutex_init(&mutex[philo_counter], NULL);
-    pthread_mutex_init(&args->print_mutex, NULL);
+    pthread_mutex_init(&args->print_mutex, NULL); //WHY IS THE PRINT_MUTEX IN ARGS AND NOT IN PHILOS
     args->fork_mutexes = mutex;
 }
 

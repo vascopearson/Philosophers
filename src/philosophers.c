@@ -8,8 +8,8 @@ int main(int argc, char **argv)
         return (1);
     if (check_and_init_args(&args, argc, argv))
         return (1);
-    init_philos(&args);
     init_mutexes(&args);
+    init_philos(&args);
     init_threads(&args);
 }
 
