@@ -30,7 +30,7 @@ int check_invalid(int argc, char **argv)
     {
         if (!ft_is_digit(argv[i]))
         {
-            printf("One of the arguments is not a number!\n");
+            printf("One of the arguments is not a positive number!\n");
             return (1);
         }
         i++;

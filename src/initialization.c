@@ -18,9 +18,7 @@ void    init_philos(t_args *args)
         philos[i].time_to_eat = args->time_to_eat;
         philos[i].time_to_die = args->time_to_die;  // LIMIT OF LIFE ??
         philos[i].limit_of_life = args->time_to_die; //REMOVE??
-        philos[i].dead = 0; // REMOVEEEE ??
         philos[i].stop = 0;
-        philos[i].enough = 0; // REMOVEEE ???
         philos[i].args = args;
         philos[i].left_fork = &args->fork_mutexes[philos[i].id];
 		philos[i].right_fork = &args->fork_mutexes[(philos[i].id + 1) % args->nbr_philos];

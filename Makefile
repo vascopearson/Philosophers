@@ -6,7 +6,7 @@ INC = inc/philosophers.h
 
 CC = gcc
 RM = rm -f
-CFLAGS = -g -Wall -Wextra -Werror -pthread #-fsanitize=address #-I$(HEADER)
+CFLAGS = -g -Wall -Wextra -Werror -pthread -I$(HEADER) #-fsanitize=address -I$(HEADER)
 HEADER = inc
 
 %.o: %.c $(INC)

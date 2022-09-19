@@ -62,6 +62,8 @@ void    *do_actions(void* philosopher)
         if (philos->args->dead || philos->stop || enough_meals(philos))
             return (NULL);
         ft_think(philos);
+        if (philos->args->dead || philos->stop || enough_meals(philos))  //REMOVE??
+            return (NULL);  
     }
     return (NULL);
 }
@@ -71,7 +73,7 @@ int enough_meals(t_philos *philos)
     int i;
     int enough;
 
-    if (philos->nbr_meals_total < 1) // || philos->nbr_meals_eaten == -1)?????
+    if (philos->nbr_meals_total < 1 || philos->nbr_meals_eaten == -1) // || philos->nbr_meals_eaten == -1)?????
         return (0);
     i = 0;
     enough = 1;

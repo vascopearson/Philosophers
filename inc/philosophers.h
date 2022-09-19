@@ -19,12 +19,10 @@ typedef struct s_philos
     int time_to_sleep;
     int time_to_eat;
     int time_to_die;
-    int limit_of_life; //REMOVE??
+    time_t limit_of_life; //REMOVE??
     time_t time_of_last_meal;
     time_t start_time;
-    int dead; // REMOVE ??
     int stop;
-    int enough; // REMOVE ??
     struct s_args *args;
     pthread_mutex_t print_mutex;
     pthread_mutex_t *left_fork;

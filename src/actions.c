@@ -18,6 +18,7 @@ void    ft_get_forks(t_philos *philos)
 	}
 	else // REMOVE?
 	{
+		usleep(30);
 		pthread_mutex_lock(philos->left_fork);
     	pthread_mutex_lock(philos->right_fork);
     	pthread_mutex_lock(&philos->print_mutex);
